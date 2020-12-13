@@ -7,7 +7,7 @@ import Divider from "@material-ui/core/Divider";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import React, { useState } from "react";
+import React from "react";
 import AccordionGrid from "./AccordionGrid";
 
 const useStyles = makeStyles((theme) => ({
@@ -47,18 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AccordionEntry(props) {
   const classes = useStyles();
-  const {
-    diveNumber,
-    diveSite,
-    date,
-    depth,
-    time,
-    weights,
-    visibility,
-    activities,
-    kindOfDive,
-    notes,
-  } = props;
+  const { diveNumber, diveSite } = props;
   return (
     <div className={classes.root}>
       <Accordion defaultExpanded>
