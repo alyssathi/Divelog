@@ -1,11 +1,10 @@
 import React from "react";
-import AccordionComp from "./components/AccordionComp/index";
-import { mockArr } from "./components/AccordionComp/mockArr";
+import Homepage from "./pages/Homepage";
 
 function App() {
   return (
     <div className="App">
-      <AccordionComp />
+      <Homepage />
     </div>
   );
 }

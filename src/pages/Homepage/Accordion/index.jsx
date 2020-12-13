@@ -1,10 +1,7 @@
-import React, { useState } from "react";
-import { mockArr } from "./mockArr";
+import React from "react";
 import AccordionEntry from "./AccordionEntry";
 
-export default function AccordionComp() {
-  const [diveEntries, setDiveEntries] = useState(mockArr);
-
+export default function Accordion({ diveEntries }) {
   return (
     <div>
       {diveEntries.map((entry) => {

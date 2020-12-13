@@ -48,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
 export default function AccordionEntry(props) {
   const classes = useStyles();
   const { diveNumber, diveSite } = props;
+
   return (
     <div className={classes.root}>
       <Accordion defaultExpanded>
