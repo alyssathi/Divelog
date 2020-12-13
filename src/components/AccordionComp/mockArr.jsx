@@ -1,0 +1,31 @@
+export const mockArr = [
+  {
+    diveNumber: 1,
+    diveSite: "Thailand",
+    date: "Dec 1",
+    depth: "18 m",
+    time: "1 hr",
+    air: "70psi",
+    weights: "4kg",
+    visibility: "1 m",
+    temperature: "20C",
+    activities: "shipwreck",
+    kindOfDive: "Boat, saltwater",
+    notes: "saw a mataray!",
+  },
+
+  {
+    diveNumber: 2,
+    diveSite: "Fiji",
+    date: "Dec 31",
+    depth: "30 m",
+    time: "45 min",
+    air: "65psi",
+    weights: "4kg",
+    visibility: "2 m",
+    temperature: "23C",
+    activities: "reef",
+    kindOfDive: "Boat, saltwater, night",
+    notes: "turtles!",
+  },
+];
