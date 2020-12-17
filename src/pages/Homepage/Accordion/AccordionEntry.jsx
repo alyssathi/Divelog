@@ -51,7 +51,7 @@ export default function AccordionEntry(props) {
 
   return (
     <div className={classes.root}>
-      <Accordion defaultExpanded>
+      <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1c-content"
