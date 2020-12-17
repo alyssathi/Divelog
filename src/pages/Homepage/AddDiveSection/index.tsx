@@ -11,10 +11,10 @@ export default function AddDiveSection(props: AddDiveSectionProps) {
   return (
     <div>
       <AddDiveDialog
-        buttonText={"Add New Dive"}
+        openDialogButtonText={"Add New Dive"}
         dialogTitle={"Add a New Dive"}
-        handleNewEntry={onSave}
-        addNewText={"Save Dive"}
+        handleSave={onSave}
+        saveButtonText={"Save Dive"}
       />
     </div>
   );

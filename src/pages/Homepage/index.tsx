@@ -11,10 +11,16 @@ export default function Homepage() {
     setDiveEntries(newEntries);
   };
 
+  const handleDelete = (id: number) => {
+    const newList = diveEntries.filter((entry) => entry.diveNumber !== id);
+    console.log(id);
+    setDiveEntries(newList);
+  };
+
   return (
     <div>
       <AddDiveSection onSave={handleSave} />
-      <Accordion diveEntries={diveEntries} />
+      <Accordion diveEntries={diveEntries} handleDelete={handleDelete} />
     </div>
   );
 }

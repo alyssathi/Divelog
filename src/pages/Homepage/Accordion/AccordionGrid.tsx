@@ -1,7 +1,8 @@
 import { Grid, Typography } from "@material-ui/core";
 import React from "react";
+import { IDiveEntry } from "./../../../Models/IDiveEntry";
 
-export default function AccordionGrid(props) {
+export default function AccordionGrid(props: IDiveEntry) {
   const {
     diveNumber,
     diveSite,

@@ -15,10 +15,11 @@ import React from "react";
 import { IDiveEntry } from "../../Models/IDiveEntry";
 
 interface DialogProps {
-  buttonText: string;
+  openDialogButtonText: string;
   dialogTitle: string;
-  handleNewEntry: (value: IDiveEntry) => void;
-  addNewText: string;
+  handleSave: (value: IDiveEntry) => void;
+  saveButtonText: string;
+  editValues?: IDiveEntry;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -42,14 +43,16 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function AddDiveDialog(props: DialogProps) {
   const classes = useStyles();
   const {
-    buttonText,
+    openDialogButtonText: buttonText,
     dialogTitle,
-    handleNewEntry: addNewFunc,
-    addNewText,
+    handleSave,
+    saveButtonText: addNewText,
+    editValues,
   } = props;
 
   const [open, setOpen] = React.useState(false);
-  const [values, setValues] = React.useState<IDiveEntry>({
+
+  const initValues: Partial<IDiveEntry> = {
     diveNumber: 0,
     diveSite: "",
     date: "",
@@ -62,7 +65,11 @@ export default function AddDiveDialog(props: DialogProps) {
     activities: "",
     kindOfDive: "",
     notes: "",
-  });
+  };
+
+  const [values, setValues] = React.useState(
+    editValues ? editValues : initValues
+  );
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -72,9 +79,11 @@ export default function AddDiveDialog(props: DialogProps) {
     setOpen(false);
   };
 
-  const handleSaveAndClose = () => {
-    addNewFunc(values);
+  const handleSaveAndClose = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    handleSave(values as IDiveEntry);
     setOpen(false);
+    setValues(initValues);
   };
 
   const handleChange = (prop: keyof IDiveEntry) => (
@@ -95,7 +104,7 @@ export default function AddDiveDialog(props: DialogProps) {
       >
         <DialogTitle id="form-dialog-title">{dialogTitle}</DialogTitle>
         <DialogContent>
-          <form>
+          <form onSubmit={handleSaveAndClose}>
             <TextField
               required
               label="Dive Number"
@@ -233,11 +242,7 @@ export default function AddDiveDialog(props: DialogProps) {
               <Button onClick={handleClose} color="primary">
                 Cancel
               </Button>
-              <Button
-                type="submit"
-                onClick={handleSaveAndClose}
-                color="primary"
-              >
+              <Button type="submit" color="primary">
                 {addNewText}
               </Button>
             </DialogActions>

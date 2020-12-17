@@ -8,6 +8,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import React from "react";
+import AddDiveDialog from "../../../components/AddDiveDialog";
+import { IDiveEntry } from "./../../../Models/IDiveEntry";
 import AccordionGrid from "./AccordionGrid";
 
 const useStyles = makeStyles((theme) => ({
@@ -45,10 +47,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AccordionEntry(props) {
-  const classes = useStyles();
-  const { diveNumber, diveSite } = props;
+interface AccordionEntryProps {
+  diveEntry: IDiveEntry;
+  handleDelete: (id: number) => void;
+}
 
+const handleSave = () => {};
+
+export default function AccordionEntry(props: AccordionEntryProps) {
+  const classes = useStyles();
+  const { diveNumber, diveSite } = props.diveEntry;
+  const { diveEntry, handleDelete } = props;
   return (
     <div className={classes.root}>
       <Accordion>
@@ -67,16 +76,24 @@ export default function AccordionEntry(props) {
           </div>
         </AccordionSummary>
         <AccordionDetails>
-          <AccordionGrid {...props} />
+          <AccordionGrid {...props.diveEntry} />
         </AccordionDetails>
         <Divider />
         <AccordionActions>
-          <Button size="small" color="secondary">
+          <Button
+            size="small"
+            color="secondary"
+            onClick={() => handleDelete(diveNumber)}
+          >
             Delete
           </Button>
-          <Button size="small" color="primary">
-            Save
-          </Button>
+          <AddDiveDialog
+            openDialogButtonText="Edit"
+            dialogTitle="Edit Dive"
+            handleSave={handleSave}
+            saveButtonText="Save"
+            editValues={diveEntry}
+          />
         </AccordionActions>
       </Accordion>
     </div>
