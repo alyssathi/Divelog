@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
 interface AccordionEntryProps {
   diveEntry: IDiveEntry;
   handleDelete: (id: number) => void;
+  handleEditSave: (id: number, diveEntry: IDiveEntry) => void;
 }
 
 const handleSave = () => {};
@@ -57,7 +58,7 @@ const handleSave = () => {};
 export default function AccordionEntry(props: AccordionEntryProps) {
   const classes = useStyles();
   const { diveNumber, diveSite } = props.diveEntry;
-  const { diveEntry, handleDelete } = props;
+  const { diveEntry, handleDelete, handleEditSave } = props;
   return (
     <div className={classes.root}>
       <Accordion>
@@ -92,6 +93,7 @@ export default function AccordionEntry(props: AccordionEntryProps) {
             dialogTitle="Edit Dive"
             handleSave={handleSave}
             saveButtonText="Save"
+            handleEditSave={handleEditSave}
             editValues={diveEntry}
           />
         </AccordionActions>

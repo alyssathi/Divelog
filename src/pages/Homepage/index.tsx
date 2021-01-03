@@ -13,14 +13,26 @@ export default function Homepage() {
 
   const handleDelete = (id: number) => {
     const newList = diveEntries.filter((entry) => entry.diveNumber !== id);
-    console.log(id);
     setDiveEntries(newList);
+  };
+
+  const handleEditSave = (id: number, diveEntry: IDiveEntry) => {
+    const diveEntriesCopy = [...diveEntries];
+    const index = diveEntriesCopy.findIndex((entry) => entry.diveNumber === id);
+    diveEntriesCopy[index] = diveEntry;
+    setDiveEntries(diveEntriesCopy);
+    console.log("dive entry copy", diveEntriesCopy);
+    console.log("dive entry: ", diveEntry);
   };
 
   return (
     <div>
       <AddDiveSection onSave={handleSave} />
-      <Accordion diveEntries={diveEntries} handleDelete={handleDelete} />
+      <Accordion
+        diveEntries={diveEntries}
+        handleDelete={handleDelete}
+        handleEditSave={handleEditSave}
+      />
     </div>
   );
 }

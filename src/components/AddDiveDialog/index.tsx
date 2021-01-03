@@ -18,6 +18,7 @@ interface DialogProps {
   openDialogButtonText: string;
   dialogTitle: string;
   handleSave: (value: IDiveEntry) => void;
+  handleEditSave?: (id: number, diveEntry: IDiveEntry) => void;
   saveButtonText: string;
   editValues?: IDiveEntry;
 }
@@ -48,11 +49,12 @@ export default function AddDiveDialog(props: DialogProps) {
     handleSave,
     saveButtonText: addNewText,
     editValues,
+    handleEditSave,
   } = props;
 
   const [open, setOpen] = React.useState(false);
 
-  const initValues: Partial<IDiveEntry> = {
+  const initValues: IDiveEntry = {
     diveNumber: 0,
     diveSite: "",
     date: "",
@@ -81,9 +83,16 @@ export default function AddDiveDialog(props: DialogProps) {
 
   const handleSaveAndClose = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    handleSave(values as IDiveEntry);
-    setOpen(false);
-    setValues(initValues);
+    if (editValues && handleEditSave) {
+      handleEditSave(editValues.diveNumber, values);
+      setOpen(false);
+      console.log("newValues: ", values);
+      console.log("values: ", values);
+    } else {
+      handleSave(values as IDiveEntry);
+      setOpen(false);
+      setValues(initValues);
+    }
   };
 
   const handleChange = (prop: keyof IDiveEntry) => (
